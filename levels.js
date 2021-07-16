@@ -15,7 +15,7 @@ var levels = {
         name: "Pop Party",
         speed: 20,
         frameToStart: 60, // frames
-        timeToFinish: 60, //Seconds
+        timeToFinish: 5, //Seconds
         pointsToFinish: 550,
         obstaclesCurrency: 45
     },  

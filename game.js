@@ -44,11 +44,13 @@ function startGame() {
         lifes = 3;
         time = 0;
         //Score text
-        myScore = new component("20px", "Consolas", "black", myGameArea.canvas.width + 40, 40, "text");
-        myTime = new component("20px", "Consolas", "black", myGameArea.canvas.width + 40, 80, "text");
-        myLifes = new component("20px", "Consolas", "black", myGameArea.canvas.width + 40, 120, "text");
+        myGameArea.start();
+        
+        myScore = new component("20px", "Consolas", "black", myGameArea.canvas.width -120, 40, "text");
+        myTime = new component("20px", "Consolas", "black", myGameArea.canvas.width -120, 80, "text");
+        myLifes = new component("20px", "Consolas", "black", myGameArea.canvas.width -120, 120, "text");
         //Arrow positions on the screen
-        leftArrowPos = myGameArea.canvas.width / 2;
+        leftArrowPos = myGameArea.canvas.width / 3;
         rightArrowPos = leftArrowPos + 40;
         upArrowPos = rightArrowPos + 40;
         downArrowPos = upArrowPos + 40;
@@ -62,7 +64,6 @@ function startGame() {
         myTime.text = "TIME: " + time;
         myLifes.text = "LIFES: " + lifes;
         
-        myGameArea.start();
     }
 }
 
@@ -245,6 +246,56 @@ function startTime() {
         time++;
         myTime.text = "TIME: "+ time
         myTime.update();
+        if(time == currentLvl.timeToFinish && score < currentLvl.pointsToFinish){
+            loseGame();
+        }
     }, 1000);
     timer.start();
+}
+
+function loseGame(){
+    currentLvl.song.stop();
+    video.pause();
+    myGameArea.stop();
+    timer.pause();
+    lifes--;
+    console.log(lifes);
+    
+}
+
+function restartGame() {
+    //Show game
+    time = 0;
+    //Score text
+    console.log(myGameArea.canvas.width);
+    myObstacles = [];
+    
+    myScore = new component("20px", "Consolas", "black", myGameArea.canvas.width -120, 40, "text");
+    myTime = new component("20px", "Consolas", "black", myGameArea.canvas.width -120, 80, "text");
+    myLifes = new component("20px", "Consolas", "black", myGameArea.canvas.width -120, 120, "text");
+    //Arrow positions on the screen
+    leftArrowPos = myGameArea.canvas.width / 3;
+    rightArrowPos = leftArrowPos + 40;
+    upArrowPos = rightArrowPos + 40;
+    downArrowPos = upArrowPos + 40;
+    //Creating arrows
+    leftArrow = new component(20, 20, "green", leftArrowPos, 0);
+    rightArrow = new component(20, 20, "red", rightArrowPos, 0);
+    upArrow = new component(20, 20, "blue", upArrowPos, 0);
+    downArrow = new component(20, 20, "yellow", downArrowPos, 0);
+    //Defining initial score in screen
+    myScore.text = "SCORE: " + (score);
+    myTime.text = "TIME: " + time;
+    myLifes.text = "LIFES: " + lifes;
+    
+    myGameArea.frameNo = 0;
+    myGameArea.start();
+    currentLvl.song.sound.currentTime = 0
+    currentLvl.song.play();
+    if(currentLvl.video != ""){
+        video.src = currentLvl.video;
+        video.play();
+    }
+    myGameArea.start.interval = setInterval(updateGameArea, currentLvl.speed);
+    startTime();
 }
