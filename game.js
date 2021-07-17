@@ -210,7 +210,7 @@ function initEvents() {
             }
             myScore.update();
             if(score == currentLvl.pointsToFinish) {
-                winGame(currentLvl);
+                winGame();
             }
     });
     document.addEventListener('keyup',(event) => {
@@ -268,11 +268,16 @@ function loseGame(){
     
 }
 
-function restartGame() {
+function restartGame(newLvl = "") {
+    if(newLvl != ""){
+        currentLvl = levels[newLvl];
+    }
     document.querySelector(".endGameBox").style="display:none;";
     document.querySelector(".endGame").style="display:none;";
+    document.querySelector(".winGame").style="display:none;";
     //Show game
     time = 0;
+    score = 0;
     //Score text
     console.log(myGameArea.canvas.width);
     myObstacles = [];
@@ -313,7 +318,7 @@ function backMenu() {
 
 }
 
-function winGame(currentLvl) {
+function winGame() {
     currentLvl.song.stop();
     video.pause();
     myGameArea.stop();
@@ -321,4 +326,16 @@ function winGame(currentLvl) {
     document.querySelector(".endGameBox").style="display:block;";
     document.querySelector(".winGame").style="display:block;";
     document.querySelector(".winGame .remainingLifes b").innerText=lifes;
+    var levelsArray = Object.values(levels);
+    levelsArray = levelsArray.filter(data => {
+        return data.key != currentLvl.key;
+    })
+    levelsArray.forEach(element => {
+        var div = document.createElement("div")
+        div.className = "newLevel";
+        div.innerText = element.name;
+        div.onclick = ()=>{restartGame(element.key);}
+        document.querySelector(".winGame .chooseNewLevel").append(div)
+    })
+    
 }
