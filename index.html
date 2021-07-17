@@ -11,6 +11,9 @@
         html{
             font-family: "graffiti";
         }
+        body{
+            margin: 0;
+        }
         canvas {
             border: 1px solid #d3d3d3;
             background-color: #f1f1f1;
@@ -114,6 +117,50 @@
             opacity: 0.3;
             z-index: 1;
         }
+        .endGameBox{
+            position: fixed;
+            background-color: black;
+            width: 100%;
+            height: 100%; 
+            z-index: 20;
+            opacity: 0.8;
+            display: none;
+        }
+        .endGame, .winGame{
+            width: 300px;
+            position: absolute;
+            z-index: 25;
+            left: 50%;
+            top: 5px;
+            transform: translate(-50%, 0);
+            text-align: center;
+            height: auto;
+            background: linear-gradient(90deg, #c1c2c4, #e6e6e8);
+            border-radius: 10px;
+            padding: 30px;
+            display: none;
+        }
+        .buttonTryAgain, .backToMenu, .newLevel{
+            width: 110px;
+            margin: 20px auto;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .buttonTryAgain:hover, .backToMenu:hover{
+            background-color: black;
+            color: white;
+        }
+        .remainingLifes{
+            font-family: arial;
+        }
+        .chooseNewLevel {
+            width: 100%;
+        }
+        .newLevel{
+            width: auto;
+        }
     </style>
 </head>
 
@@ -153,6 +200,7 @@
         <button value="stop" class="stop" onclick="stopButton(this)">Pause</button>
         <button value="Resume" class="resume" onclick="resumeButton(this)">Resume</button>
     </div>
+    <!-- User data -->
     <div class="gameData">
         <div class="dataBox">
             <div class="text">username:</div>
@@ -163,9 +211,32 @@
                 <div class="currentLvl"></div>
         </div>
     </div>
+    <!-- Background video for each level-->
     <video playsinline autoplay muted loop  id="bgvid">
         <source src="" >
     </video>
+
+    <!-- End game-->
+    <div class="endGameBox">
+    </div>
+    <div class="endGame">
+        <h1>Lost Game!</h1>
+        <div class="remainingLifes">
+            You've <b>n</b> lifes left
+        </div>
+        <div class="buttonTryAgain" onclick="restartGame()">Try again</div>
+        <div class="backToMenu" onclick="backMenu()">Back to menu</div>
+    </div>
+    <div class="winGame">
+        <h1>You win!</h1>
+        <div class="remainingLifes">
+            You've <b>n</b> lifes left
+        </div>
+        <div class="chooseNewLevel">
+            <div class="newLevel">Pop Party</div>
+            <div class="newLevel">Reggae Party</div>
+        </div>
+    </div>
     <script src="./game.js"></script>
     <script src="./levels.js"></script>
     <script src="./timer.js"></script>

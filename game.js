@@ -209,6 +209,9 @@ function initEvents() {
                 }
             }
             myScore.update();
+            if(score == currentLvl.pointsToFinish) {
+                winGame(currentLvl);
+            }
     });
     document.addEventListener('keyup',(event) => {
         keys[event.key]=false;
@@ -259,11 +262,15 @@ function loseGame(){
     myGameArea.stop();
     timer.pause();
     lifes--;
-    console.log(lifes);
+    document.querySelector(".endGameBox").style="display:block;";
+    document.querySelector(".endGame").style="display:block;";
+    document.querySelector(".remainingLifes b").innerText=lifes;
     
 }
 
 function restartGame() {
+    document.querySelector(".endGameBox").style="display:none;";
+    document.querySelector(".endGame").style="display:none;";
     //Show game
     time = 0;
     //Score text
@@ -298,4 +305,20 @@ function restartGame() {
     }
     myGameArea.start.interval = setInterval(updateGameArea, currentLvl.speed);
     startTime();
+}
+
+function backMenu() {
+    location.reload();
+
+
+}
+
+function winGame(currentLvl) {
+    currentLvl.song.stop();
+    video.pause();
+    myGameArea.stop();
+    timer.pause();
+    document.querySelector(".endGameBox").style="display:block;";
+    document.querySelector(".winGame").style="display:block;";
+    document.querySelector(".winGame .remainingLifes b").innerText=lifes;
 }

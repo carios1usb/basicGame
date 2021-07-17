@@ -5,8 +5,8 @@ var levels = {
         name: "Rock Party",
         speed: 40,
         frameToStart: 500, // frames
-        timeToFinish: 70, //Seconds
-        pointsToFinish: 500,
+        timeToFinish: 26, //Seconds
+        pointsToFinish: 20,
         obstaclesCurrency: 50
    },
    level2 : {
