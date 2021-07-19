@@ -314,8 +314,6 @@ function restartGame(newLvl = "") {
 
 function backMenu() {
     location.reload();
-
-
 }
 
 function winGame() {

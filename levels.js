@@ -17,19 +17,8 @@ var levels = {
         name: "Pop Party",
         speed: 20,
         frameToStart: 60, // frames
-        timeToFinish: 40, //Seconds
+        timeToFinish: 10, //Seconds
         pointsToFinish: 300,
         obstaclesCurrency: 45
-    },  
-    level3 : {
-        key:"level3",
-        song: new sound("lvl3.mp3"),
-        video: "./level3.mp4",
-        name: "Reggae Party",
-        speed: 20,
-        frameToStart: 500, // frames
-        timeToFinish: 80, //Seconds
-        pointsToFinish: 600,
-        obstaclesCurrency: 35
     }
 }

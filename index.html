@@ -60,8 +60,8 @@
             position: absolute;
             z-index: 10;
             left: 50%;
-            top: 5px;
-            transform: translate(-50%, 0);
+            top: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
             height: auto;
             background: linear-gradient(90deg, #c1c2c4, #e6e6e8);
@@ -88,7 +88,7 @@
         .lvlOption{
             width: 30%;
             padding: 5px;
-            float: left;
+            margin: 15px auto;
         }
         .lvlOption label{
             display: inline;
@@ -185,10 +185,10 @@
                 <input type="radio" name="level" id="level2" value="level2">
                 <label for="level2">Pop Party</label>
             </div>
-            <div class="lvlOption">
+            <!-- div class="lvlOption">
                 <input type="radio" name="level" id="level3" value="level3">
                 <label for="level3">Reggae Party</label>
-            </div>
+            </div-->
         </div>
         <div class="menuRow">
             <div class="menuContinue" onclick="startGame()">Let's play</div>
@@ -219,6 +219,7 @@
     <!-- End game-->
     <div class="endGameBox">
     </div>
+    
     <div class="endGame">
         <h1>Lost Game!</h1>
         <div class="remainingLifes">
